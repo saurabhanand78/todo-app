@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>To-Do phone mock-ups</title>
+<style>
+  body { margin: 0; padding: 32px 16px; background: #e9ebef; font-family: system-ui, sans-serif; color: #222; }
+  h1 { text-align: center; font-size: 1.2rem; margin: 0 0 24px; }
+  .stage { display: flex; flex-wrap: wrap; justify-content: center; gap: 48px; }
+  figure { margin: 0; text-align: center; }
+  figcaption { margin-top: 12px; font-size: .9rem; color: #555; }
+  .scale { transform: scale(.8); transform-origin: top center; }
+  .box { width: calc(var(--w) * .8px); height: calc(var(--h) * .8px); }
+
+  .phone { position: relative; background: #111; box-shadow: 0 20px 40px rgba(0,0,0,.3); }
+  .screen { position: relative; overflow: hidden; background: #fff; display: flex; flex-direction: column; }
+  iframe { border: 0; width: 100%; flex: 1; display: block; background: #fff; }
+  .status { display: flex; justify-content: space-between; align-items: center; font-size: 14px; font-weight: 600; flex: none; }
+  .status.light { background: #fff; color: #000; }
+  .status.dark { background: #16181d; color: #fff; }
+
+  /* iPhone 15-style: 390 x 844 */
+  .iphone { --w: 414; --h: 868; width: 414px; height: 868px; border-radius: 64px; padding: 12px; }
+  .iphone .screen { height: 844px; border-radius: 52px; }
+  .iphone .status { height: 47px; padding: 0 34px 0 40px; align-items: flex-end; padding-bottom: 8px; box-sizing: border-box; }
+  .island { position: absolute; top: 11px; left: 50%; transform: translateX(-50%); width: 120px; height: 34px; background: #000; border-radius: 20px; z-index: 5; }
+  .home-ind { height: 26px; flex: none; display: flex; justify-content: center; align-items: center; }
+  .home-ind i { width: 140px; height: 5px; border-radius: 3px; background: #000; opacity: .85; }
+  .home-ind.dark i { background: #fff; }
+  .home-ind.light { background: #fff; } .home-ind.dark { background: #16181d; }
+
+  /* Pixel-style Android: 412 x 915 */
+  .android { --w: 436; --h: 939; width: 436px; height: 939px; border-radius: 44px; padding: 12px; background: #1b1b1d; }
+  .android .screen { height: 915px; border-radius: 32px; }
+  .android .status { height: 30px; padding: 0 20px; font-weight: 500; }
+  .punch { position: absolute; top: 9px; left: 50%; transform: translateX(-50%); width: 14px; height: 14px; background: #000; border-radius: 50%; z-index: 5; }
+  .navbar { height: 48px; flex: none; display: flex; justify-content: center; align-items: center; gap: 70px; }
+  .navbar.dark { background: #16181d; } .navbar.light { background: #fff; }
+  .navbar svg { width: 18px; height: 18px; }
+  .navbar.dark svg { stroke: #ddd; fill: none; } .navbar.light svg { stroke: #333; fill: none; }
+</style>
+</head>
+<body>
+<h1>To-Do app: phone mock-ups (rendered from index.html)</h1>
+<div class="stage">
+
+  <figure>
+    <div class="box" style="--w:414;--h:868">
+      <div class="scale">
+        <div class="phone iphone">
+          <div class="island"></div>
+          <div class="screen">
+            <div class="status light"><span>9:41</span><span>●●●● &nbsp;5G &nbsp;🔋</span></div>
+            <iframe srcdoc="&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+&lt;meta charset=&quot;utf-8&quot;&gt;
+&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+&lt;title&gt;To-Do&lt;/title&gt;
+&lt;style&gt;
+  :root {
+    --bg: #ffffff; --fg: #1a1a1a; --muted: #555; --done: #888; --border: #ddd;
+    --field-bg: #ffffff; --field-border: #767676; --btn-bg: #efefef;
+    --badge-bg: #e8eefc; --badge-fg: #223; --overdue: #c00;
+    color-scheme: light;
+  }
+  :root[data-theme=&quot;dark&quot;] {
+    --bg: #16181d; --fg: #e8e8e8; --muted: #a0a4ab; --done: #6f737a; --border: #2d3038;
+    --field-bg: #21242b; --field-border: #4a4e57; --btn-bg: #2a2d35;
+    --badge-bg: #2b3550; --badge-fg: #d6e0ff; --overdue: #ff6b6b;
+    color-scheme: dark;
+  }
+  body { font-family: system-ui, sans-serif; max-width: 560px; margin: 2rem auto; padding: 0 16px; background: var(--bg); color: var(--fg); }
+  header { display: flex; flex-direction: column; align-items: stretch; }
+  h1 { text-align: center; margin-top: .3em; }
+  #theme { order: -1; align-self: flex-end; }
+  input, select, button { background: var(--field-bg); color: var(--fg); border: 1px solid var(--field-border); border-radius: 4px; }
+  button { background: var(--btn-bg); }
+  input[type=checkbox] { accent-color: #3b6fe0; }
+  form { display: flex; flex-wrap: wrap; gap: 8px; }
+  input[type=text], input[type=date], select { padding: 8px; font-size: 1rem; }
+  #text { flex: 1 1 100%; }
+  #category { flex: 1 1 120px; min-width: 0; }
+  #due { flex: 0 1 auto; }
+  button { padding: 8px 12px; font-size: 1rem; cursor: pointer; }
+  #theme { display: flex; gap: 4px; }
+  #theme button { padding: 6px 8px; line-height: 0; min-width: 40px; min-height: 40px; }
+  /* comfortable touch targets on phones */
+  input[type=checkbox] { width: 22px; height: 22px; flex: none; }
+  li button { min-width: 44px; min-height: 44px; }
+  @media (max-width: 480px) { form button { flex: 1 1 100%; min-height: 44px; } }
+  #theme button[aria-pressed=&quot;true&quot;] { background: #3b6fe0; border-color: #3b6fe0; color: #fff; }
+  ul { list-style: none; padding: 0; }
+  li { display: flex; align-items: center; gap: 8px; padding: 8px 0; border-bottom: 1px solid var(--border); }
+  .body { flex: 1; min-width: 0; display: flex; flex-wrap: wrap; align-items: center; gap: 4px 8px; }
+  .title { flex: 1 1 100%; overflow-wrap: anywhere; }
+  .badge { font-size: .8rem; background: var(--badge-bg); color: var(--badge-fg); border-radius: 10px; padding: 1px 8px; }
+  .due { font-size: .8rem; color: var(--muted); }
+  .due.overdue { color: var(--overdue); font-weight: 600; }
+  li.done .title { text-decoration: line-through; color: var(--done); }
+  li.done .due { color: var(--done); font-weight: normal; }
+  .body input, .body select { padding: 4px; font-size: 1rem; }
+  .body input.edit-text { flex: 1 1 100%; }
+  .body select.edit-cat { flex: 1 1 100px; min-width: 0; }
+&lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;header&gt;
+  &lt;h1&gt;To-Do&lt;/h1&gt;
+  &lt;div id=&quot;theme&quot; role=&quot;group&quot; aria-label=&quot;Theme&quot;&gt;
+    &lt;button type=&quot;button&quot; data-theme-val=&quot;light&quot; aria-label=&quot;Light mode&quot; title=&quot;Light mode&quot;&gt;&lt;/button&gt;
+    &lt;button type=&quot;button&quot; data-theme-val=&quot;dark&quot; aria-label=&quot;Dark mode&quot; title=&quot;Dark mode&quot;&gt;&lt;/button&gt;
+  &lt;/div&gt;
+&lt;/header&gt;
+&lt;form id=&quot;form&quot;&gt;
+  &lt;input type=&quot;text&quot; id=&quot;text&quot; placeholder=&quot;New item&quot; autocomplete=&quot;off&quot;&gt;
+  &lt;select id=&quot;category&quot; aria-label=&quot;Category&quot;&gt;
+    &lt;option&gt;Work&lt;/option&gt;
+    &lt;option&gt;Personal&lt;/option&gt;
+    &lt;option&gt;Others&lt;/option&gt;
+  &lt;/select&gt;
+  &lt;input type=&quot;date&quot; id=&quot;due&quot; aria-label=&quot;Due date&quot;&gt;
+  &lt;button type=&quot;submit&quot;&gt;Add&lt;/button&gt;
+&lt;/form&gt;
+&lt;ul id=&quot;list&quot;&gt;&lt;/ul&gt;
+&lt;script&gt;
+  const CATEGORIES = [&#39;Work&#39;, &#39;Personal&#39;, &#39;Others&#39;];
+  let todos = [];
+  let nextId = 1;
+  let editingId = null;
+  const list = document.getElementById(&#39;list&#39;);
+  const input = document.getElementById(&#39;text&#39;);
+  const catInput = document.getElementById(&#39;category&#39;);
+  const dueInput = document.getElementById(&#39;due&#39;);
+  const themeBox = document.getElementById(&#39;theme&#39;);
+  const SVG_OPEN = &#39;&lt;svg width=&quot;18&quot; height=&quot;18&quot; viewBox=&quot;0 0 24 24&quot; fill=&quot;none&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;2&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot; aria-hidden=&quot;true&quot; style=&quot;pointer-events:none;display:block&quot;&gt;&#39;;
+  const ICON_SUN = SVG_OPEN + &#39;&lt;circle cx=&quot;12&quot; cy=&quot;12&quot; r=&quot;4&quot;/&gt;&lt;path d=&quot;M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4&quot;/&gt;&lt;/svg&gt;&#39;;
+  const ICON_MOON = SVG_OPEN + &#39;&lt;path d=&quot;M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8Z&quot;/&gt;&lt;/svg&gt;&#39;;
+  themeBox.querySelector(&#39;[data-theme-val=&quot;light&quot;]&#39;).innerHTML = ICON_SUN;
+  themeBox.querySelector(&#39;[data-theme-val=&quot;dark&quot;]&#39;).innerHTML = ICON_MOON;
+
+  // Theme: saved choice if any, otherwise the system preference
+  function applyTheme(t) {
+    document.documentElement.dataset.theme = t;
+    for (const b of themeBox.querySelectorAll(&#39;button&#39;)) {
+      b.setAttribute(&#39;aria-pressed&#39;, String(b.dataset.themeVal === t));
+    }
+  }
+  let savedTheme = null;
+  try { savedTheme = localStorage.getItem(&#39;todo-theme&#39;); } catch (e) {}
+  applyTheme(savedTheme === &#39;light&#39; || savedTheme === &#39;dark&#39;
+    ? savedTheme
+    : (window.matchMedia &amp;&amp; matchMedia(&#39;(prefers-color-scheme: dark)&#39;).matches ? &#39;dark&#39; : &#39;light&#39;));
+  themeBox.addEventListener(&#39;click&#39;, e =&gt; {
+    const b = e.target.closest(&#39;button&#39;);
+    if (!b) return;
+    applyTheme(b.dataset.themeVal);
+    try { localStorage.setItem(&#39;todo-theme&#39;, b.dataset.themeVal); } catch (err) {}
+  });
+
+  const ICON_PENCIL = SVG_OPEN + &#39;&lt;path d=&quot;M12 20h9&quot;/&gt;&lt;path d=&quot;M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z&quot;/&gt;&lt;/svg&gt;&#39;;
+  const ICON_BIN = SVG_OPEN + &#39;&lt;path d=&quot;M3 6h18&quot;/&gt;&lt;path d=&quot;M8 6V4h8v2&quot;/&gt;&lt;path d=&quot;M19 6l-1 14H6L5 6&quot;/&gt;&lt;path d=&quot;M10 11v6&quot;/&gt;&lt;path d=&quot;M14 11v6&quot;/&gt;&lt;/svg&gt;&#39;;
+
+  function todayStr() {
+    const d = new Date();
+    const p = n =&gt; String(n).padStart(2, &#39;0&#39;);
+    return d.getFullYear() + &#39;-&#39; + p(d.getMonth() + 1) + &#39;-&#39; + p(d.getDate());
+  }
+
+  function formatDate(s) {
+    const [y, m, d] = s.split(&#39;-&#39;).map(Number);
+    return new Date(y, m - 1, d).toLocaleDateString(undefined, { day: &#39;numeric&#39;, month: &#39;short&#39;, year: &#39;numeric&#39; });
+  }
+
+  function field(cls, type, value, placeholder, extra) {
+    const el = document.createElement(&#39;input&#39;);
+    el.type = type;
+    el.className = cls;
+    el.value = value;
+    if (placeholder) el.placeholder = placeholder;
+    if (extra) for (const k in extra) el.setAttribute(k, extra[k]);
+    return el;
+  }
+
+  function categorySelect(value) {
+    const sel = document.createElement(&#39;select&#39;);
+    sel.className = &#39;edit edit-cat&#39;;
+    sel.setAttribute(&#39;aria-label&#39;, &#39;Category&#39;);
+    for (const c of CATEGORIES) {
+      const o = document.createElement(&#39;option&#39;);
+      o.textContent = c;
+      sel.append(o);
+    }
+    sel.value = value;
+    return sel;
+  }
+
+  function render() {
+    list.innerHTML = &#39;&#39;;
+    const today = todayStr();
+    let firstField = null;
+    for (const t of todos) {
+      const li = document.createElement(&#39;li&#39;);
+      li.dataset.id = t.id;
+      if (t.done) li.className = &#39;done&#39;;
+      const cb = document.createElement(&#39;input&#39;);
+      cb.type = &#39;checkbox&#39;;
+      cb.checked = t.done;
+
+      const body = document.createElement(&#39;div&#39;);
+      body.className = &#39;body&#39;;
+      if (t.id === editingId) {
+        firstField = field(&#39;edit edit-text&#39;, &#39;text&#39;, t.text, &#39;Item&#39;);
+        body.append(
+          firstField,
+          categorySelect(t.category),
+          field(&#39;edit edit-due&#39;, &#39;date&#39;, t.due, &#39;&#39;, { &#39;aria-label&#39;: &#39;Due date&#39; })
+        );
+      } else {
+        const title = document.createElement(&#39;span&#39;);
+        title.className = &#39;title&#39;;
+        title.textContent = t.text;
+        const b = document.createElement(&#39;span&#39;);
+        b.className = &#39;badge&#39;;
+        b.textContent = t.category;
+        body.append(title, b);
+        if (t.due) {
+          const d = document.createElement(&#39;span&#39;);
+          d.className = &#39;due&#39; + (!t.done &amp;&amp; t.due &lt; today ? &#39; overdue&#39; : &#39;&#39;);
+          d.textContent = (t.due &lt; today &amp;&amp; !t.done ? &#39;Overdue: &#39; : &#39;Due: &#39;) + formatDate(t.due);
+          body.append(d);
+        }
+      }
+
+      const edit = document.createElement(&#39;button&#39;);
+      edit.innerHTML = ICON_PENCIL;
+      edit.className = &#39;edit-btn&#39;;
+      edit.setAttribute(&#39;aria-label&#39;, &#39;Edit&#39;);
+      const del = document.createElement(&#39;button&#39;);
+      del.innerHTML = ICON_BIN;
+      del.className = &#39;del-btn&#39;;
+      del.setAttribute(&#39;aria-label&#39;, &#39;Delete&#39;);
+      li.append(cb, body, edit, del);
+      list.append(li);
+    }
+    if (firstField) { firstField.focus(); firstField.select(); }
+  }
+
+  function finishEdit(save, li) {
+    const t = todos.find(t =&gt; t.id === editingId);
+    editingId = null;
+    if (save &amp;&amp; t &amp;&amp; li) {
+      const text = li.querySelector(&#39;.edit-text&#39;).value.trim();
+      if (text) {
+        t.text = text;
+        t.category = li.querySelector(&#39;.edit-cat&#39;).value;
+        t.due = li.querySelector(&#39;.edit-due&#39;).value;
+      }
+    }
+    render();
+  }
+
+  list.addEventListener(&#39;keydown&#39;, e =&gt; {
+    if (!e.target.classList.contains(&#39;edit&#39;)) return;
+    const li = e.target.closest(&#39;li&#39;);
+    if (e.key === &#39;Enter&#39;) { e.preventDefault(); finishEdit(true, li); }
+    else if (e.key === &#39;Escape&#39;) finishEdit(false);
+  });
+
+  // Save when focus leaves the row&#39;s edit fields (but not when moving between them)
+  list.addEventListener(&#39;focusout&#39;, e =&gt; {
+    if (!e.target.classList.contains(&#39;edit&#39;) || editingId === null) return;
+    const li = e.target.closest(&#39;li&#39;);
+    if (e.relatedTarget &amp;&amp; li.contains(e.relatedTarget)) return;
+    finishEdit(true, li);
+  });
+
+  document.getElementById(&#39;form&#39;).addEventListener(&#39;submit&#39;, e =&gt; {
+    e.preventDefault();
+    const text = input.value.trim();
+    if (!text) return;
+    todos.push({
+      id: nextId++,
+      text,
+      category: catInput.value,
+      due: dueInput.value,
+      done: false
+    });
+    input.value = &#39;&#39;;
+    dueInput.value = &#39;&#39;;
+    render();
+  });
+
+  list.addEventListener(&#39;click&#39;, e =&gt; {
+    const li = e.target.closest(&#39;li&#39;);
+    if (!li) return;
+    const id = Number(li.dataset.id);
+    if (e.target.classList.contains(&#39;del-btn&#39;)) {
+      todos = todos.filter(t =&gt; t.id !== id);
+      if (editingId === id) editingId = null;
+    } else if (e.target.classList.contains(&#39;edit-btn&#39;)) {
+      editingId = id;
+    } else if (e.target.type === &#39;checkbox&#39;) {
+      const t = todos.find(t =&gt; t.id === id);
+      t.done = e.target.checked;
+    } else return;
+    render();
+  });
+
+  // Sample data for screenshots/mock-ups only: open index.html#demo or #demo-dark
+  if (true) {
+    const day = n =&gt; { const d = new Date(); d.setDate(d.getDate() + n); const p = x =&gt; String(x).padStart(2, &#39;0&#39;); return d.getFullYear() + &#39;-&#39; + p(d.getMonth() + 1) + &#39;-&#39; + p(d.getDate()); };
+    todos = [
+      { id: 1, text: &#39;Send quarterly report to finance&#39;, category: &#39;Work&#39;, due: day(-1), done: false },
+      { id: 2, text: &#39;Book dentist appointment&#39;, category: &#39;Personal&#39;, due: day(3), done: false },
+      { id: 3, text: &#39;Buy groceries&#39;, category: &#39;Others&#39;, due: &#39;&#39;, done: false },
+      { id: 4, text: &#39;Renew gym membership&#39;, category: &#39;Personal&#39;, due: day(10), done: true },
+      { id: 5, text: &#39;Prepare Monday team agenda&#39;, category: &#39;Work&#39;, due: day(5), done: false }
+    ];
+    nextId = 6;
+    if (false) applyTheme(&#39;dark&#39;);
+    render();
+  }
+&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+" title="iPhone preview"></iframe>
+            <div class="home-ind light"><i></i></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <figcaption>iPhone 15 · iOS (390 × 844), light mode</figcaption>
+  </figure>
+
+  <figure>
+    <div class="box" style="--w:436;--h:939">
+      <div class="scale">
+        <div class="phone android">
+          <div class="punch"></div>
+          <div class="screen">
+            <div class="status dark"><span>12:30</span><span>▲ ◢ 🔋 87%</span></div>
+            <iframe srcdoc="&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+&lt;meta charset=&quot;utf-8&quot;&gt;
+&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+&lt;title&gt;To-Do&lt;/title&gt;
+&lt;style&gt;
+  :root {
+    --bg: #ffffff; --fg: #1a1a1a; --muted: #555; --done: #888; --border: #ddd;
+    --field-bg: #ffffff; --field-border: #767676; --btn-bg: #efefef;
+    --badge-bg: #e8eefc; --badge-fg: #223; --overdue: #c00;
+    color-scheme: light;
+  }
+  :root[data-theme=&quot;dark&quot;] {
+    --bg: #16181d; --fg: #e8e8e8; --muted: #a0a4ab; --done: #6f737a; --border: #2d3038;
+    --field-bg: #21242b; --field-border: #4a4e57; --btn-bg: #2a2d35;
+    --badge-bg: #2b3550; --badge-fg: #d6e0ff; --overdue: #ff6b6b;
+    color-scheme: dark;
+  }
+  body { font-family: system-ui, sans-serif; max-width: 560px; margin: 2rem auto; padding: 0 16px; background: var(--bg); color: var(--fg); }
+  header { display: flex; flex-direction: column; align-items: stretch; }
+  h1 { text-align: center; margin-top: .3em; }
+  #theme { order: -1; align-self: flex-end; }
+  input, select, button { background: var(--field-bg); color: var(--fg); border: 1px solid var(--field-border); border-radius: 4px; }
+  button { background: var(--btn-bg); }
+  input[type=checkbox] { accent-color: #3b6fe0; }
+  form { display: flex; flex-wrap: wrap; gap: 8px; }
+  input[type=text], input[type=date], select { padding: 8px; font-size: 1rem; }
+  #text { flex: 1 1 100%; }
+  #category { flex: 1 1 120px; min-width: 0; }
+  #due { flex: 0 1 auto; }
+  button { padding: 8px 12px; font-size: 1rem; cursor: pointer; }
+  #theme { display: flex; gap: 4px; }
+  #theme button { padding: 6px 8px; line-height: 0; min-width: 40px; min-height: 40px; }
+  /* comfortable touch targets on phones */
+  input[type=checkbox] { width: 22px; height: 22px; flex: none; }
+  li button { min-width: 44px; min-height: 44px; }
+  @media (max-width: 480px) { form button { flex: 1 1 100%; min-height: 44px; } }
+  #theme button[aria-pressed=&quot;true&quot;] { background: #3b6fe0; border-color: #3b6fe0; color: #fff; }
+  ul { list-style: none; padding: 0; }
+  li { display: flex; align-items: center; gap: 8px; padding: 8px 0; border-bottom: 1px solid var(--border); }
+  .body { flex: 1; min-width: 0; display: flex; flex-wrap: wrap; align-items: center; gap: 4px 8px; }
+  .title { flex: 1 1 100%; overflow-wrap: anywhere; }
+  .badge { font-size: .8rem; background: var(--badge-bg); color: var(--badge-fg); border-radius: 10px; padding: 1px 8px; }
+  .due { font-size: .8rem; color: var(--muted); }
+  .due.overdue { color: var(--overdue); font-weight: 600; }
+  li.done .title { text-decoration: line-through; color: var(--done); }
+  li.done .due { color: var(--done); font-weight: normal; }
+  .body input, .body select { padding: 4px; font-size: 1rem; }
+  .body input.edit-text { flex: 1 1 100%; }
+  .body select.edit-cat { flex: 1 1 100px; min-width: 0; }
+&lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;header&gt;
+  &lt;h1&gt;To-Do&lt;/h1&gt;
+  &lt;div id=&quot;theme&quot; role=&quot;group&quot; aria-label=&quot;Theme&quot;&gt;
+    &lt;button type=&quot;button&quot; data-theme-val=&quot;light&quot; aria-label=&quot;Light mode&quot; title=&quot;Light mode&quot;&gt;&lt;/button&gt;
+    &lt;button type=&quot;button&quot; data-theme-val=&quot;dark&quot; aria-label=&quot;Dark mode&quot; title=&quot;Dark mode&quot;&gt;&lt;/button&gt;
+  &lt;/div&gt;
+&lt;/header&gt;
+&lt;form id=&quot;form&quot;&gt;
+  &lt;input type=&quot;text&quot; id=&quot;text&quot; placeholder=&quot;New item&quot; autocomplete=&quot;off&quot;&gt;
+  &lt;select id=&quot;category&quot; aria-label=&quot;Category&quot;&gt;
+    &lt;option&gt;Work&lt;/option&gt;
+    &lt;option&gt;Personal&lt;/option&gt;
+    &lt;option&gt;Others&lt;/option&gt;
+  &lt;/select&gt;
+  &lt;input type=&quot;date&quot; id=&quot;due&quot; aria-label=&quot;Due date&quot;&gt;
+  &lt;button type=&quot;submit&quot;&gt;Add&lt;/button&gt;
+&lt;/form&gt;
+&lt;ul id=&quot;list&quot;&gt;&lt;/ul&gt;
+&lt;script&gt;
+  const CATEGORIES = [&#39;Work&#39;, &#39;Personal&#39;, &#39;Others&#39;];
+  let todos = [];
+  let nextId = 1;
+  let editingId = null;
+  const list = document.getElementById(&#39;list&#39;);
+  const input = document.getElementById(&#39;text&#39;);
+  const catInput = document.getElementById(&#39;category&#39;);
+  const dueInput = document.getElementById(&#39;due&#39;);
+  const themeBox = document.getElementById(&#39;theme&#39;);
+  const SVG_OPEN = &#39;&lt;svg width=&quot;18&quot; height=&quot;18&quot; viewBox=&quot;0 0 24 24&quot; fill=&quot;none&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;2&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot; aria-hidden=&quot;true&quot; style=&quot;pointer-events:none;display:block&quot;&gt;&#39;;
+  const ICON_SUN = SVG_OPEN + &#39;&lt;circle cx=&quot;12&quot; cy=&quot;12&quot; r=&quot;4&quot;/&gt;&lt;path d=&quot;M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4&quot;/&gt;&lt;/svg&gt;&#39;;
+  const ICON_MOON = SVG_OPEN + &#39;&lt;path d=&quot;M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8Z&quot;/&gt;&lt;/svg&gt;&#39;;
+  themeBox.querySelector(&#39;[data-theme-val=&quot;light&quot;]&#39;).innerHTML = ICON_SUN;
+  themeBox.querySelector(&#39;[data-theme-val=&quot;dark&quot;]&#39;).innerHTML = ICON_MOON;
+
+  // Theme: saved choice if any, otherwise the system preference
+  function applyTheme(t) {
+    document.documentElement.dataset.theme = t;
+    for (const b of themeBox.querySelectorAll(&#39;button&#39;)) {
+      b.setAttribute(&#39;aria-pressed&#39;, String(b.dataset.themeVal === t));
+    }
+  }
+  let savedTheme = null;
+  try { savedTheme = localStorage.getItem(&#39;todo-theme&#39;); } catch (e) {}
+  applyTheme(savedTheme === &#39;light&#39; || savedTheme === &#39;dark&#39;
+    ? savedTheme
+    : (window.matchMedia &amp;&amp; matchMedia(&#39;(prefers-color-scheme: dark)&#39;).matches ? &#39;dark&#39; : &#39;light&#39;));
+  themeBox.addEventListener(&#39;click&#39;, e =&gt; {
+    const b = e.target.closest(&#39;button&#39;);
+    if (!b) return;
+    applyTheme(b.dataset.themeVal);
+    try { localStorage.setItem(&#39;todo-theme&#39;, b.dataset.themeVal); } catch (err) {}
+  });
+
+  const ICON_PENCIL = SVG_OPEN + &#39;&lt;path d=&quot;M12 20h9&quot;/&gt;&lt;path d=&quot;M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z&quot;/&gt;&lt;/svg&gt;&#39;;
+  const ICON_BIN = SVG_OPEN + &#39;&lt;path d=&quot;M3 6h18&quot;/&gt;&lt;path d=&quot;M8 6V4h8v2&quot;/&gt;&lt;path d=&quot;M19 6l-1 14H6L5 6&quot;/&gt;&lt;path d=&quot;M10 11v6&quot;/&gt;&lt;path d=&quot;M14 11v6&quot;/&gt;&lt;/svg&gt;&#39;;
+
+  function todayStr() {
+    const d = new Date();
+    const p = n =&gt; String(n).padStart(2, &#39;0&#39;);
+    return d.getFullYear() + &#39;-&#39; + p(d.getMonth() + 1) + &#39;-&#39; + p(d.getDate());
+  }
+
+  function formatDate(s) {
+    const [y, m, d] = s.split(&#39;-&#39;).map(Number);
+    return new Date(y, m - 1, d).toLocaleDateString(undefined, { day: &#39;numeric&#39;, month: &#39;short&#39;, year: &#39;numeric&#39; });
+  }
+
+  function field(cls, type, value, placeholder, extra) {
+    const el = document.createElement(&#39;input&#39;);
+    el.type = type;
+    el.className = cls;
+    el.value = value;
+    if (placeholder) el.placeholder = placeholder;
+    if (extra) for (const k in extra) el.setAttribute(k, extra[k]);
+    return el;
+  }
+
+  function categorySelect(value) {
+    const sel = document.createElement(&#39;select&#39;);
+    sel.className = &#39;edit edit-cat&#39;;
+    sel.setAttribute(&#39;aria-label&#39;, &#39;Category&#39;);
+    for (const c of CATEGORIES) {
+      const o = document.createElement(&#39;option&#39;);
+      o.textContent = c;
+      sel.append(o);
+    }
+    sel.value = value;
+    return sel;
+  }
+
+  function render() {
+    list.innerHTML = &#39;&#39;;
+    const today = todayStr();
+    let firstField = null;
+    for (const t of todos) {
+      const li = document.createElement(&#39;li&#39;);
+      li.dataset.id = t.id;
+      if (t.done) li.className = &#39;done&#39;;
+      const cb = document.createElement(&#39;input&#39;);
+      cb.type = &#39;checkbox&#39;;
+      cb.checked = t.done;
+
+      const body = document.createElement(&#39;div&#39;);
+      body.className = &#39;body&#39;;
+      if (t.id === editingId) {
+        firstField = field(&#39;edit edit-text&#39;, &#39;text&#39;, t.text, &#39;Item&#39;);
+        body.append(
+          firstField,
+          categorySelect(t.category),
+          field(&#39;edit edit-due&#39;, &#39;date&#39;, t.due, &#39;&#39;, { &#39;aria-label&#39;: &#39;Due date&#39; })
+        );
+      } else {
+        const title = document.createElement(&#39;span&#39;);
+        title.className = &#39;title&#39;;
+        title.textContent = t.text;
+        const b = document.createElement(&#39;span&#39;);
+        b.className = &#39;badge&#39;;
+        b.textContent = t.category;
+        body.append(title, b);
+        if (t.due) {
+          const d = document.createElement(&#39;span&#39;);
+          d.className = &#39;due&#39; + (!t.done &amp;&amp; t.due &lt; today ? &#39; overdue&#39; : &#39;&#39;);
+          d.textContent = (t.due &lt; today &amp;&amp; !t.done ? &#39;Overdue: &#39; : &#39;Due: &#39;) + formatDate(t.due);
+          body.append(d);
+        }
+      }
+
+      const edit = document.createElement(&#39;button&#39;);
+      edit.innerHTML = ICON_PENCIL;
+      edit.className = &#39;edit-btn&#39;;
+      edit.setAttribute(&#39;aria-label&#39;, &#39;Edit&#39;);
+      const del = document.createElement(&#39;button&#39;);
+      del.innerHTML = ICON_BIN;
+      del.className = &#39;del-btn&#39;;
+      del.setAttribute(&#39;aria-label&#39;, &#39;Delete&#39;);
+      li.append(cb, body, edit, del);
+      list.append(li);
+    }
+    if (firstField) { firstField.focus(); firstField.select(); }
+  }
+
+  function finishEdit(save, li) {
+    const t = todos.find(t =&gt; t.id === editingId);
+    editingId = null;
+    if (save &amp;&amp; t &amp;&amp; li) {
+      const text = li.querySelector(&#39;.edit-text&#39;).value.trim();
+      if (text) {
+        t.text = text;
+        t.category = li.querySelector(&#39;.edit-cat&#39;).value;
+        t.due = li.querySelector(&#39;.edit-due&#39;).value;
+      }
+    }
+    render();
+  }
+
+  list.addEventListener(&#39;keydown&#39;, e =&gt; {
+    if (!e.target.classList.contains(&#39;edit&#39;)) return;
+    const li = e.target.closest(&#39;li&#39;);
+    if (e.key === &#39;Enter&#39;) { e.preventDefault(); finishEdit(true, li); }
+    else if (e.key === &#39;Escape&#39;) finishEdit(false);
+  });
+
+  // Save when focus leaves the row&#39;s edit fields (but not when moving between them)
+  list.addEventListener(&#39;focusout&#39;, e =&gt; {
+    if (!e.target.classList.contains(&#39;edit&#39;) || editingId === null) return;
+    const li = e.target.closest(&#39;li&#39;);
+    if (e.relatedTarget &amp;&amp; li.contains(e.relatedTarget)) return;
+    finishEdit(true, li);
+  });
+
+  document.getElementById(&#39;form&#39;).addEventListener(&#39;submit&#39;, e =&gt; {
+    e.preventDefault();
+    const text = input.value.trim();
+    if (!text) return;
+    todos.push({
+      id: nextId++,
+      text,
+      category: catInput.value,
+      due: dueInput.value,
+      done: false
+    });
+    input.value = &#39;&#39;;
+    dueInput.value = &#39;&#39;;
+    render();
+  });
+
+  list.addEventListener(&#39;click&#39;, e =&gt; {
+    const li = e.target.closest(&#39;li&#39;);
+    if (!li) return;
+    const id = Number(li.dataset.id);
+    if (e.target.classList.contains(&#39;del-btn&#39;)) {
+      todos = todos.filter(t =&gt; t.id !== id);
+      if (editingId === id) editingId = null;
+    } else if (e.target.classList.contains(&#39;edit-btn&#39;)) {
+      editingId = id;
+    } else if (e.target.type === &#39;checkbox&#39;) {
+      const t = todos.find(t =&gt; t.id === id);
+      t.done = e.target.checked;
+    } else return;
+    render();
+  });
+
+  // Sample data for screenshots/mock-ups only: open index.html#demo or #demo-dark
+  if (true) {
+    const day = n =&gt; { const d = new Date(); d.setDate(d.getDate() + n); const p = x =&gt; String(x).padStart(2, &#39;0&#39;); return d.getFullYear() + &#39;-&#39; + p(d.getMonth() + 1) + &#39;-&#39; + p(d.getDate()); };
+    todos = [
+      { id: 1, text: &#39;Send quarterly report to finance&#39;, category: &#39;Work&#39;, due: day(-1), done: false },
+      { id: 2, text: &#39;Book dentist appointment&#39;, category: &#39;Personal&#39;, due: day(3), done: false },
+      { id: 3, text: &#39;Buy groceries&#39;, category: &#39;Others&#39;, due: &#39;&#39;, done: false },
+      { id: 4, text: &#39;Renew gym membership&#39;, category: &#39;Personal&#39;, due: day(10), done: true },
+      { id: 5, text: &#39;Prepare Monday team agenda&#39;, category: &#39;Work&#39;, due: day(5), done: false }
+    ];
+    nextId = 6;
+    if (true) applyTheme(&#39;dark&#39;);
+    render();
+  }
+&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+" title="Android preview"></iframe>
+            <div class="navbar dark">
+              <svg viewBox="0 0 24 24" stroke-width="2"><path d="M15 5 7 12l8 7"/></svg>
+              <svg viewBox="0 0 24 24" stroke-width="2"><circle cx="12" cy="12" r="7"/></svg>
+              <svg viewBox="0 0 24 24" stroke-width="2"><rect x="5" y="5" width="14" height="14" rx="2"/></svg>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <figcaption>Pixel · Android (412 × 915), dark mode</figcaption>
+  </figure>
+
+</div>
+</body>
+</html>
